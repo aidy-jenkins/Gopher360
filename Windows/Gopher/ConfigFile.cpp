@@ -108,6 +108,7 @@ void ConfigFile::ExtractKeys()
     outfile << "#	Startup configuration (0 = false, 1 or any other value = true)" << std::endl;
     outfile << std::endl;
     outfile << "INIT_DISABLED_ON_START = 0x0 # Determines whether the gamepad controls mouse / keyboard input on starting Gopher" << std::endl;
+    outfile << "INIT_MINIMISED_ON_START = 0x0 # Determines whether the Gopher window starts minimised" << std::endl;
     outfile << std::endl;
     outfile << "#	Map buttons to actions" << std::endl;
     outfile << std::endl;

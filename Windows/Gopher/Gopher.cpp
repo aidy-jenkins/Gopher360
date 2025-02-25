@@ -1,5 +1,6 @@
 #include "Gopher.h"
 #include "ConfigFile.h"
+#include <winuser.h>
 
 // Description:
 //   Send a keyboard input to the system based on the key value
@@ -87,6 +88,7 @@ void Gopher::loadConfigFile()
   //--------------------------------
     
   _disabled = strtol(cfg.getValueOfKey<std::string>("INIT_DISABLED_ON_START").c_str(), 0, 0) != 0;
+  bool startMinimised = strtol(cfg.getValueOfKey<std::string>("INIT_MINIMISED_ON_START").c_str(), 0, 0) != 0;
 
   //--------------------------------
   // Configuration bindings
@@ -192,6 +194,11 @@ void Gopher::loadConfigFile()
 
   // Swap stick functions
   SWAP_THUMBSTICKS = strtol(cfg.getValueOfKey<std::string>("SWAP_THUMBSTICKS").c_str(), 0, 0);
+
+  if (startMinimised) {
+      HWND windowHandle = GetConsoleWindow();
+      CloseWindow(windowHandle); //CloseWindow does not close the window
+  }
 
   // Set the initial window visibility
   setWindowVisibility(_hidden);
